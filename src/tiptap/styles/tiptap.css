@@ -1,0 +1,84 @@
+.floating-menu {
+  &__icon {
+    @apply h-4 w-4
+  }
+}
+
+.ProseMirror {
+  >*+* {
+    @apply mt-2
+  }
+
+  ul {
+    @apply ml-2
+  }
+
+  ol {
+    padding: 0 1rem;
+  }
+
+  h1 {
+    @apply text-[1.625rem] font-bold leading-[2.375rem] tracking-wider;
+  }
+
+  h2 {
+    @apply text-[1.375rem] font-bold leading-[2.125rem] tracking-wide;
+  }
+
+  h3 {
+    @apply text-xl font-bold tracking-wide;
+  }
+
+  h4 {
+    @apply text-lg font-bold tracking-wide;
+  }
+
+  h5 {
+    @apply text-base font-bold tracking-wide;
+  }
+
+  h6 {
+    @apply text-base font-bold tracking-wide;
+  }
+
+  h7 {
+    @apply text-base font-bold tracking-wide;
+  }
+
+  code {
+    background-color: rgba(97, 97, 97, 0.1);
+    color: #616161;
+  }
+
+  pre {
+    background: #0d0d0d;
+    color: #fff;
+    font-family: "JetBrainsMono", monospace;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+  }
+
+  pre code {
+    color: inherit;
+    padding: 0;
+    background: none;
+    font-size: 0.8rem;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  blockquote {
+    padding-left: 1rem;
+    border-left: 2px solid rgba(13, 13, 13, 0.1);
+  }
+
+  hr {
+    border: none;
+    border-top: 2px solid rgba(13, 13, 13, 0.1);
+    margin: 2rem 0;
+  }
+
+}
