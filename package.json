@@ -32,11 +32,17 @@
     "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.33.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
     "postcss": "^8.4.32",
     "postcss-nesting": "^12.0.2",
+    "prop-types": "^15.8.1",
     "tailwindcss": "^3.3.6",
     "vite": "^5.0.8",
-    "vite-plugin-svg-icons": "^2.0.1",
-    "prop-types": "^15.8.1"
+    "vite-plugin-svg-icons": "^2.0.1"
+  },
+  "lint-staged": {
+    "*.js|*.jsx": "eslint . --ext --fix --report-unused-disable-directives --max-warnings 0",
+    "*.css": "stylelint --fix"
   }
 }
