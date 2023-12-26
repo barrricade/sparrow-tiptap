@@ -1,5 +1,9 @@
 {
     "cSpell.words": [
         "tiptap"
-    ]
+    ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "eslint.validate": ["javascript"]
 }
