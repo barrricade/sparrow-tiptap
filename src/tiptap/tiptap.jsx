@@ -1,11 +1,18 @@
 import { EditorProvider } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import CustomFloatingMenu from './extensions/CustomFloatingMenu'
 import './styles/tiptap.css'
 import PropTypes from 'prop-types'
-
+import SlashMenu from './extensions/slash_menu/javascript/slash-menu.js'
+import suggestion from './extensions/slash_menu/javascript/suggestion.js'
 const extensions = [
-  StarterKit
+  StarterKit.configure({
+    heading: {
+      levels: [1, 2, 3, 4, 5, 6, 7]
+    }
+  }),
+  SlashMenu.configure({
+    suggestion
+  })
 ]
 
 const Tiptap = (props) => {
@@ -22,7 +29,7 @@ const Tiptap = (props) => {
     }
   }, editorOptions)
   return (
-    <EditorProvider {...editorOptions} slotBefore={<CustomFloatingMenu></CustomFloatingMenu>} extensions={extensions}></EditorProvider>
+    <EditorProvider {...editorOptions} extensions={extensions}></EditorProvider>
   )
 }
 export default Tiptap
