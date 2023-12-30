@@ -5,25 +5,24 @@
 </p>
 
 <p align="center">
-Welcome to Sparrow-Tiptap! The open source Block-Based
-rich text editor. Easily add a modern text editing experience to your app.
+Sparrow-Tiptap是一个 react 的基于 tiptap 和  的 「所见即所得」 富文本编辑器
 </p>
 
-# Language 📔
+# 选择语言 📔
 
-English | [简体中文](./README_ZH.md)
+[English](./README.md) | 简体中文
 
-# Live demo 🎄
+# 在线演示 🎄
 
 Play with the editor @ [https://43.134.94.59/](https://43.134.94.59/).
 
-# Install 📦
+# 安装 📦
 
 ```shell
 npm install --save sparrow-tiptap
 ```
 
-# Example code (React)
+# 用法 (React)
 
 ```javascript
 import Stiptap from 'sparrow-tiptap';
@@ -39,25 +38,22 @@ function App () {
 export default App
 ```
 
-# Features
-
-SparrowTiptap comes with a number of features and components to make it easy to embed a high-quality block-based editor in your app:
+# 特色
 
 .....
 
-# Contributing 🙌
+# 贡献代码 🙌
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+详细信息见 [CONTRIBUTING](CONTRIBUTING.md) 
 
 
-# License 📄 
+# 许可证 📄 
 
 [MIT](https://github.com/barrricade/sparrow-tiptap/blob/main/LICENSE)
 
-# Buy Me A Coffee ❤️
+# 赞赏 ❤️
 
-I am so happy that so many people like this project, and I will do better with your support.
-
+如果喜欢这个项目的话，可以请我喝一杯卡布奇诺，非常感谢你的支持
 <p>
   <img alt="reward" src="/doc/img/reward.jpg" width="300">
   <a href="https://www.buymeacoffee.com/barri.sparrow" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-blue.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>

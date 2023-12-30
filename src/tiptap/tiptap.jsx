@@ -18,11 +18,6 @@ const extensions = [
 const Tiptap = (props) => {
   let { onUpdate, ...editorOptions } = props
   editorOptions = Object.assign({
-    editorProps: {
-      attributes: {
-        class: 'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl p-2'
-      }
-    },
     onUpdate: (event) => {
       const { editor } = event
       onUpdate && onUpdate(editor)

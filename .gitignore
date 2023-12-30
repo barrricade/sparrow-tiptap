@@ -5,7 +5,7 @@ node_modules
 dist
 dist-ssr
 .eslintcache
-
+core
 # Local env files
 *.local
 
