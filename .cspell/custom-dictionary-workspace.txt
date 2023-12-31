@@ -1,4 +1,6 @@
 # Custom Dictionary Words
 Barri
+dropcursor
+gapcursor
 prosemirrow
 stiptap

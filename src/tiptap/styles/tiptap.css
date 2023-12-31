@@ -17,6 +17,16 @@
 }
 .ProseMirror {
   @apply p-2 !text-left;
+  &-focused {
+    @apply !outline-none
+  }
+  [data-placeholder].is-empty::before {
+    color: #adb5bd;
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+  }
   p {
     @apply m-0
   }
@@ -25,11 +35,82 @@
   }
 
   ul {
-    @apply ml-2
+    padding: 0 1rem;
+    list-style: disc;
+
+    li {
+      margin-bottom: 4px;
+    }
   }
 
   ol {
     padding: 0 1rem;
+    list-style: decimal;
+  }
+
+  /* task-list */
+  ul[data-type="taskList"] {
+    list-style: none;
+    padding: 0;
+    > div {
+      flex: 1 1 auto;
+    }
+    p {
+      margin: 0;
+    }
+
+    li {
+      display: flex;
+      > label {
+        margin-right: 0.5rem;
+        user-select: none;
+
+        input[type="checkbox"] {
+          -webkit-appearance: none;
+          appearance: none;
+          position: relative;
+          top: 5px;
+          display: grid;
+          place-content: center;
+          width: 1rem;
+          height: 1rem;
+          border: 1px solid #cbd5e1;
+          border-radius: 0.25rem;
+          outline: none;
+          cursor: pointer;
+          appearance: none;
+          position: relative;
+        }
+
+        input[type="checkbox"]::before {
+          content: " ";
+          display: inline-block;
+          line-height: normal;
+          font-size: 16px;
+          background-position: 50%;
+          white-space: normal;
+          width: 16px;
+          height: 16px;
+          border-radius: 0.25rem;
+          position: absolute;
+          top: 0;
+        }
+        input[type="checkbox"]:checked::before {
+          background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 16 16' fill='%23fff' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.207 4.793a1 1 0 0 1 0 1.414l-5 5a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L6.5 9.086l4.293-4.293a1 1 0 0 1 1.414 0z'/%3E%3C/svg%3E");
+          background-color: #4f46e5;
+        }
+      }
+
+      > div {
+        flex: 1 1 auto;
+      }
+    }
+  }
+  
+  ul[data-type="taskList"] li[data-checked="true"] > div > p {
+    color: rgb(168 162 158);
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
   }
 
   h1 {

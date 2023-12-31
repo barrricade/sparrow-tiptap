@@ -1,7 +1,8 @@
 import { Extension } from '@tiptap/core'
 import Suggestion from '@tiptap/suggestion'
+import suggestion from './suggestion.js'
 
-export default Extension.create({
+export const SlashMenu = Extension.create({
   name: 'slashMenu',
 
   addOptions () {
@@ -11,7 +12,8 @@ export default Extension.create({
         command: ({ editor, range, props }) => {
           props.command({ editor, range })
         }
-      }
+      },
+      items: null
     }
   },
 
@@ -19,7 +21,8 @@ export default Extension.create({
     return [
       Suggestion({
         editor: this.editor,
-        ...this.options.suggestion
+        ...this.options.suggestion,
+        ...suggestion(this.options.items)
       })
     ]
   }

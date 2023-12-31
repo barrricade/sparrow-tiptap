@@ -2,7 +2,6 @@ import {
   forwardRef, useEffect, useImperativeHandle,
   useState
 } from 'react'
-import SvgIcon from '@/components/SvgIcon'
 import PropTypes from 'prop-types'
 
 const SlashMenu = forwardRef((props, ref) => {
@@ -76,7 +75,7 @@ const SlashMenu = forwardRef((props, ref) => {
                 onClick={(event) => { selectItem(index) }}
                 data-key={item.key}
               >
-                {item.icon && <SvgIcon name={item.icon} className="slash-menu__icon" />}
+                {item.icon}
                 <span>{item.label}</span>
               </div >
             )
