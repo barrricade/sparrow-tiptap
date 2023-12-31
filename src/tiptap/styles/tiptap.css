@@ -176,5 +176,28 @@
     border-top: 2px solid rgba(13, 13, 13, 0.1);
     margin: 2rem 0;
   }
+  .document_title {
+    @apply flex items-start;
+    &__icon {
+      @apply rounded-md cursor-pointer justify-center text-3xl hover:bg-slate-100;
+    }
+    &__content {
+      @apply mb-[1.1875rem] pl-[0.18rem] text-3xl font-bold;
+    }
+  }
+  [data-placeholder].is-empty {
+    .document_title__content::before {
+      position: absolute;
+      color: #adb5bd;
+      content: attr(data-placeholder);
+      float: left;
+      height: 0;
+      pointer-events: none;
+      @apply text-3xl font-bold;
+    }
+  }
   
+  .node-documentTitle::before {
+    content: ''!important;
+  }
 }

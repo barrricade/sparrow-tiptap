@@ -29,7 +29,7 @@ const App = () => {
     <div className="App">
       <Sidebar mainContent={
         <Stiptap
-          className='m-auto h-screen max-w-xl'
+          className='m-auto h-screen w-3/4'
           // onBeforeCreate={onBeforeCreate}
           // onCreate={onCreate}
           // onUpdate={onUpdate}
@@ -38,7 +38,7 @@ const App = () => {
           // onFocus={onFocus}
           // onBlur={onBlur}
           // onDestroy={onDestroy}
-          extensions={[StarterKit]}
+          extensions={[StarterKit.configure({ document: { documentTitle: true } })]}
         // slashMenu={[{ label: 'test', key: 'h1' }]}
         />
       }></Sidebar>

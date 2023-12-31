@@ -11,7 +11,7 @@ import { Code } from '@tiptap/extension-code'
 import { Italic } from '@tiptap/extension-italic'
 import { Strike } from '@tiptap/extension-strike'
 // Node
-import { Document } from '@tiptap/extension-document'
+import { CustomDocument } from '@/tiptap/extensions/document/javascript/document.js'
 import { Paragraph } from '@tiptap/extension-paragraph'
 import { Text } from '@tiptap/extension-text'
 import { Heading } from '@tiptap/extension-heading'
@@ -20,15 +20,20 @@ import { HorizontalRule } from '@tiptap/extension-horizontal-rule'
 import { OrderedList } from '@tiptap/extension-ordered-list'
 import { ListItem } from '@tiptap/extension-list-item'
 import { BulletList } from '@tiptap/extension-bullet-list'
+import { DocumentTitle } from '@/tiptap/extensions/document-title/javascript/document-title.js'
 
 export const StarterKit = Extension.create({
   name: 'starterKit',
 
   addExtensions () {
     const extensions = []
-
+    // const documentContent = '(block)+'
+    // TODO: 为文档添加标题，分栏，高亮块
+    if (this.options.documentTitle !== false) {
+      extensions.push(DocumentTitle.configure(this.options?.documentTitle))
+    }
     if (this.options.document !== false) {
-      extensions.push(Document.configure(this.options?.document))
+      extensions.push(CustomDocument.configure({ content: 'block+', ...this.options?.document }))
     }
 
     if (this.options.heading !== false) {
