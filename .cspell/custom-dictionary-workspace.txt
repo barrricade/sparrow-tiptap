@@ -4,3 +4,4 @@ dropcursor
 gapcursor
 prosemirrow
 stiptap
+tippyjs

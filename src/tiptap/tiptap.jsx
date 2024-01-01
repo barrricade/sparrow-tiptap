@@ -2,12 +2,13 @@ import { EditorProvider } from '@tiptap/react'
 import './styles/tiptap.css'
 import PropTypes from 'prop-types'
 import { StarterKit } from './extensions/index'
+import EditorInput from '@/components/EditorInput.jsx'
 export const Stiptap = (props) => {
   const defaultExtensions = [
     StarterKit
   ]
   const finalExtensions = props.extensions || defaultExtensions
-  let { onBeforeCreate, onCreate, onUpdate, onSelectionUpdate, onTransaction, onFocus, onBlur, onDestroy, ...editorOptions } = props
+  let { content, outputFormat, getOutput, editable, onBeforeCreate, onCreate, onUpdate, onSelectionUpdate, onTransaction, onFocus, onBlur, onDestroy, ...editorOptions } = props
   editorOptions = Object.assign({
     editorProps: {
       attributes: {
@@ -21,6 +22,9 @@ export const Stiptap = (props) => {
       onCreate && onCreate(event)
     },
     onUpdate: (event) => {
+      getOutput(
+        outputFormat === 'json' ? JSON.stringify(event.editor.getJSON()) : event.editor.getHTML()
+      )
       onUpdate && onUpdate(event)
     },
     onSelectionUpdate: (event) => {
@@ -39,11 +43,15 @@ export const Stiptap = (props) => {
       onDestroy && onDestroy(event)
     }
   }, editorOptions)
+  // TODO: 暂时添加, 后续删除slotAfter
   return (
-    <EditorProvider {...editorOptions} extensions={finalExtensions}></EditorProvider>
+    <EditorProvider {...editorOptions} slotAfter={<EditorInput content={content} />} extensions={finalExtensions} content={content}></EditorProvider>
   )
 }
 Stiptap.propTypes = {
+  content: PropTypes.string,
+  outputFormat: PropTypes.oneOf(['json', 'html']),
+  getOutput: PropTypes.func,
   onBeforeCreate: PropTypes.func,
   onCreate: PropTypes.func,
   onUpdate: PropTypes.func,
@@ -54,7 +62,8 @@ Stiptap.propTypes = {
   onDestroy: PropTypes.func,
   slashMenu: PropTypes.object,
   extensions: PropTypes.array,
-  className: PropTypes.string
+  className: PropTypes.string,
+  editable: PropTypes.bool
 }
 
 export * from '@/tiptap/extensions'

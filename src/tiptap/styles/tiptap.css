@@ -6,13 +6,16 @@
       @apply mb-1 px-4 text-sm text-gray-500;
     }
     &__item {
-      @apply relative cursor-pointer inline-flex space-x-2 items-center px-4 py-2 text-sm font-medium rounded-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white
+      @apply relative cursor-pointer flex space-x-2 items-center px-4 py-2 text-sm font-medium rounded-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white
     }
     &--is-selected {
       @apply bg-gray-100 text-blue-700 dark:bg-gray-600 dark:text-white
     }
     &__icon {
       @apply h-4 w-4
+    }
+    &__submenu-arrow {
+      @apply flex-1 flex items-center justify-end
     }
 }
 .ProseMirror {

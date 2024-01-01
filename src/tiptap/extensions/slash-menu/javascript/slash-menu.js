@@ -1,5 +1,5 @@
 import { Extension } from '@tiptap/core'
-import Suggestion from '@tiptap/suggestion'
+import { Suggestion } from './suggestionSource.js'
 import suggestion from './suggestion.js'
 
 export const SlashMenu = Extension.create({

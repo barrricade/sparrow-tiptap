@@ -79,5 +79,8 @@ const Sidebar = (props) => {
 
 export default Sidebar
 Sidebar.propTypes = {
-  mainContent: PropTypes.element
+  mainContent: PropTypes.element,
+  input: PropTypes.string,
+  output: PropTypes.string,
+  handleChange: PropTypes.func
 }
