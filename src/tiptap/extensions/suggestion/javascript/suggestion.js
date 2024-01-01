@@ -5,6 +5,16 @@ import { findSuggestionMatch } from './findSuggestionMatch.js'
 
 export const SuggestionPluginKey = new PluginKey('suggestion')
 
+// TODO: 暂时使用定时器，等待官方解决
+function getDecorationNodeAsync (view, state) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const decorationNode = view.dom.querySelector(`[data-decoration-id="${state.decorationId}"]`)
+      resolve(decorationNode)
+    }, 50) // 1000毫秒后执行
+  })
+}
+
 export function Suggestion ({
   pluginKey = SuggestionPluginKey,
   editor,
@@ -46,9 +56,8 @@ export function Suggestion ({
           }
 
           const state = handleExit && !handleStart ? prev : next
-          const decorationNode = view.dom.querySelector(
-            `[data-decoration-id="${state.decorationId}"]`
-          )
+          const decorationNode = await getDecorationNodeAsync(view, state)
+          console.log(decorationNode)
 
           props = {
             editor,
@@ -57,7 +66,7 @@ export function Suggestion ({
             text: state.text,
             items: [],
             command: commandProps => {
-              command({
+              return command({
                 editor,
                 range: state.range,
                 props: commandProps
@@ -92,7 +101,6 @@ export function Suggestion ({
               editor,
               query: state.query
             })
-            console.log(props.items)
           }
           if (handleExit) {
             renderer?.onExit?.(props)
@@ -165,6 +173,7 @@ export function Suggestion ({
 
           // If we found a match, update the current state to show it
           if (match && allow({ editor, state, range: match.range })) {
+            console.log(next, '成功执行')
             next.active = true
             next.decorationId = prev.decorationId ? prev.decorationId : decorationId
             next.range = match.range
@@ -208,7 +217,6 @@ export function Suggestion ({
         if (!active) {
           return null
         }
-
         return DecorationSet.create(state.doc, [
           Decoration.inline(range.from, range.to, {
             nodeName: decorationTag,

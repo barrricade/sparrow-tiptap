@@ -1,14 +1,21 @@
 import { Extension } from '@tiptap/core'
-import { Suggestion } from './suggestionSource.js'
+import { Suggestion } from '@/tiptap/extensions/suggestion/javascript/suggestion.js'
 import suggestion from './suggestion.js'
+import { PluginKey } from '@tiptap/pm/state'
 
 export const SlashMenu = Extension.create({
   name: 'slashMenu',
 
   addOptions () {
     return {
-      suggestion: {
+      suggestion1: {
         char: '/',
+        command: ({ editor, range, props }) => {
+          props.command({ editor, range })
+        }
+      },
+      suggestion2: {
+        char: '、',
         command: ({ editor, range, props }) => {
           props.command({ editor, range })
         }
@@ -20,8 +27,15 @@ export const SlashMenu = Extension.create({
   addProseMirrorPlugins () {
     return [
       Suggestion({
+        pluginKey: new PluginKey('slashMenu1'),
         editor: this.editor,
-        ...this.options.suggestion,
+        ...this.options.suggestion1,
+        ...suggestion(this.options.items)
+      }),
+      Suggestion({
+        pluginKey: new PluginKey('slashMenu2'),
+        editor: this.editor,
+        ...this.options.suggestion2,
         ...suggestion(this.options.items)
       })
     ]
