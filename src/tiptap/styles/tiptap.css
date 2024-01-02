@@ -185,7 +185,7 @@
       @apply rounded-md cursor-pointer justify-center text-3xl hover:bg-slate-100;
     }
     &__content {
-      @apply mb-[1.1875rem] pl-[0.18rem] text-3xl font-bold;
+      @apply mb-[1.1875rem] text-3xl font-bold;
     }
   }
   [data-placeholder].is-empty {

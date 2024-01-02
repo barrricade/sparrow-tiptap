@@ -1,4 +1,5 @@
 import {
+  Fragment,
   forwardRef, useEffect, useImperativeHandle,
   useState
 } from 'react'
@@ -60,17 +61,20 @@ const SlashMenu = forwardRef((props, ref) => {
   const leftHandler = () => {
     const descendants = selectedIndex.split('/')
     let currentLevelItems = props.items
+    let parentLevelItemType = null
     if (descendants.length > 1) {
       descendants.slice(0, descendants.length - 1).forEach((element, i) => {
+        if (i === descendants.length - 2) {
+          parentLevelItemType = currentLevelItems[parseInt(element)].type
+        }
         currentLevelItems = currentLevelItems[parseInt(element)].children
       })
     }
     let newIndex = parseInt(descendants[descendants.length - 1])
     do {
-      if (descendants.length > 1) {
+      if (parentLevelItemType === 'submenu') {
         // 打开侧边栏，设置parentIndex
         setVisible(false)
-        // setParentIndex(String(newIndex))
         descendants.pop()
         break
       } else {
@@ -106,12 +110,29 @@ const SlashMenu = forwardRef((props, ref) => {
     setSelectedIndex(newIndex)
   }
   const enterHandler = () => {
-    selectItem(selectedIndex)
+    const descendants = selectedIndex.split('/')
+    let currentLevelItems = props.items
+    if (descendants.length > 1) {
+      descendants.slice(0, descendants.length - 1).forEach((element, i) => {
+        currentLevelItems = currentLevelItems[parseInt(element)].children
+      })
+    }
+    let newIndex = parseInt(descendants[descendants.length - 1])
+    if (currentLevelItems[newIndex].type === 'submenu') {
+      setVisible(true)
+      descendants.push(0)
+      newIndex = descendants.join('/')
+      setSelectedIndex(newIndex)
+    } else {
+      selectItem(selectedIndex)
+    }
   }
 
   useEffect(() => {
-    const index = props.items.findIndex(item => item.type !== 'group')
-    setSelectedIndex(String(index))
+    if (props.items.length !== 0) {
+      const index = props.items[0].type === 'group' ? '0/0' : '0'
+      setSelectedIndex(index)
+    }
   }, [props.items])
 
   useImperativeHandle(ref, () => ({
@@ -146,11 +167,14 @@ const SlashMenu = forwardRef((props, ref) => {
       const key = parentKey ? `${parentKey}/${index}` : `${index}`
       if (item.type === 'group') {
         return (
-          <div key={key} className="slash-menu__group">
-            <span>
-              {item.label}
-            </span>
-          </div>
+          <Fragment key={key}>
+            <div className="slash-menu__group">
+              <span>
+                {item.label}
+              </span>
+            </div>
+            {itemList(item.children, key)}
+          </Fragment>
         )
       } else if (item.type === 'submenu') {
         const submenuItems = () => {

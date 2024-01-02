@@ -11,10 +11,30 @@ function getDecorationNodeAsync (view, state) {
     setTimeout(() => {
       const decorationNode = view.dom.querySelector(`[data-decoration-id="${state.decorationId}"]`)
       resolve(decorationNode)
-    }, 50) // 1000毫秒后执行
+    }, 50)
   })
 }
+function filterItems (items, text) {
+  if (!text) return items
+  let result = []
 
+  items.forEach(item => {
+    if (item.type === 'group' && item.children) {
+      const childItems = filterItems(item.children, text)
+      if (childItems.length !== 0) {
+        item.children = filterItems(item.children, text)
+        result.push(item)
+      }
+    } else if (item.type === 'submenu' && item.children) {
+        result = result.concat(filterItems(item.children, text))
+    } else {
+      if (item.key.toLowerCase().includes(text.toLowerCase()) || item.label.toLowerCase().includes(text.toLowerCase())) {
+        result.push(item)
+      }
+    }
+  })
+  return result
+}
 export function Suggestion ({
   pluginKey = SuggestionPluginKey,
   editor,
@@ -57,8 +77,9 @@ export function Suggestion ({
 
           const state = handleExit && !handleStart ? prev : next
           const decorationNode = await getDecorationNodeAsync(view, state)
-          console.log(decorationNode)
-
+          // 查询父节点判断是否需要弹出suggestion
+          const { $cursor } = view.state.selection
+          const currentNode = $cursor.node()
           props = {
             editor,
             range: state.range,
@@ -75,15 +96,16 @@ export function Suggestion ({
             decorationNode,
             // virtual node for popper.js or tippy.js
             // this can be used for building popups without a DOM node
-            clientRect: decorationNode
+            // TODO: 后续考虑更灵活的方式
+            clientRect: decorationNode && currentNode.type.name !== 'documentTitle'
               ? () => {
                 // because of `items` can be asynchrounous we’ll search for the current decoration node
                   const { decorationId } = this.key?.getState(editor.state)
-                const currentDecorationNode = view.dom.querySelector(
-                  `[data-decoration-id="${decorationId}"]`
-                )
+                  const currentDecorationNode = view.dom.querySelector(
+                    `[data-decoration-id="${decorationId}"]`
+                  )
 
-                return currentDecorationNode?.getBoundingClientRect() || null
+                  return currentDecorationNode?.getBoundingClientRect() || null
               }
               : null
           }
@@ -97,10 +119,15 @@ export function Suggestion ({
           }
 
           if (handleChange || handleStart) {
-            props.items = await items({
+            // 搜索符合条件的items
+            const itemList = await items({
               editor,
               query: state.query
             })
+            const text = state.text.slice(1, state.text.length)
+            const filteredList = filterItems(itemList, text)
+            props.items = filteredList
+            next.empty = filteredList.length === 0
           }
           if (handleExit) {
             renderer?.onExit?.(props)
@@ -149,9 +176,12 @@ export function Suggestion ({
         const { selection } = transaction
         const { empty, from } = selection
         const next = { ...prev }
-
         next.composing = composing
-
+        // reset empty state when the suggestion is deleted
+        // Optimize: 优化
+        if (selection.$from.parent?.textContent.length === 0) {
+          next.empty = false
+        }
         // We can only be suggesting if the view is editable, and:
         //   * there is no selection, or
         //   * a composition is active (see: https://github.com/ueberdosis/tiptap/issues/1449)
@@ -160,7 +190,6 @@ export function Suggestion ({
           if ((from < prev.range.from || from > prev.range.to) && !composing && !prev.composing) {
             next.active = false
           }
-
           // Try to match against where our cursor currently is
           const match = findSuggestionMatch({
             char,
@@ -172,8 +201,7 @@ export function Suggestion ({
           const decorationId = `id_${Math.floor(Math.random() * 0xffffffff)}`
 
           // If we found a match, update the current state to show it
-          if (match && allow({ editor, state, range: match.range })) {
-            console.log(next, '成功执行')
+          if (match && !next.empty && allow({ editor, state, range: match.range })) {
             next.active = true
             next.decorationId = prev.decorationId ? prev.decorationId : decorationId
             next.range = match.range

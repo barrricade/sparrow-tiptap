@@ -6,7 +6,6 @@ export function findSuggestionMatch (config) {
   } = config
 
   const escapedChar = escapeForRegEx(char)
-  console.log(escapedChar, '???escapedChar')
   const suffix = new RegExp(`\\s${escapedChar}$`)
   const prefix = startOfLine ? '^' : ''
   const regexp = allowSpaces
@@ -21,9 +20,7 @@ export function findSuggestionMatch (config) {
 
   const textFrom = $position.pos - text.length
   const match = Array.from(text.matchAll(regexp)).pop()
-  console.log(Array.from(text.matchAll(regexp)), '???match')
   if (!match || match.input === undefined || match.index === undefined) {
-    console.log('match匹配失败')
     return null
   }
 

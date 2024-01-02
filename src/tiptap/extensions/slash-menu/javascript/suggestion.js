@@ -72,19 +72,20 @@ const getItems = (items) => {
     })
   }
   return [
-    getItem('基础', 'grp', null, null, null, 'group'),
-    getItem('文本', 'text', icon('text'), itemCommand('text')),
-    getItem('一级标题', 'h1', icon('h1'), itemCommand('h1')),
-    getItem('二级标题', 'h2', icon('h2'), itemCommand('h2')),
-    getItem('三级标题', 'h3', icon('h3'), itemCommand('h3')),
-    getItem('多级标题', 'hn', icon('hn'), null, [
-      getItem('四级标题', 'h4', icon('h4'), itemCommand('h4')),
-      getItem('五级标题', 'h5', icon('h5'), itemCommand('h5')),
-      getItem('六级标题', 'h6', icon('h6'), itemCommand('h6')),
-      getItem('七级标题', 'h7', icon('h7'), itemCommand('h7'))
-    ], 'submenu'),
-    getItem('有序列表', 'orderedList', icon('orderedList'), itemCommand('orderedList')),
-    getItem('无序列表', 'bubbleList', icon('bubbleList'), itemCommand('bubbleList'))
+    getItem('基础', 'grp', null, null, [
+      getItem('文本', 'text', icon('text'), itemCommand('text')),
+      getItem('一级标题', 'h1', icon('h1'), itemCommand('h1')),
+      getItem('二级标题', 'h2', icon('h2'), itemCommand('h2')),
+      getItem('三级标题', 'h3', icon('h3'), itemCommand('h3')),
+      getItem('多级标题', 'hn', icon('hn'), null, [
+        getItem('四级标题', 'h4', icon('h4'), itemCommand('h4')),
+        getItem('五级标题', 'h5', icon('h5'), itemCommand('h5')),
+        getItem('六级标题', 'h6', icon('h6'), itemCommand('h6')),
+        getItem('七级标题', 'h7', icon('h7'), itemCommand('h7'))
+      ], 'submenu'),
+      getItem('有序列表', 'orderedList', icon('orderedList'), itemCommand('orderedList')),
+      getItem('无序列表', 'bubbleList', icon('bubbleList'), itemCommand('bubbleList'))
+    ], 'group')
   ]
 }
 export default (items) => {

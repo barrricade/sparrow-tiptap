@@ -47,7 +47,7 @@ const App = () => {
     <div className="App">
       <Sidebar mainContent={
         <Stiptap
-          className='m-auto h-96 w-3/4 overflow-auto'
+          className='m-auto h-[70vh] w-3/4 overflow-auto'
           outputFormat="html"
           content={content}
           getOutput={getOutput}
