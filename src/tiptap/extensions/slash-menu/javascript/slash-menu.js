@@ -5,7 +5,7 @@ import { PluginKey } from '@tiptap/pm/state'
 
 export const SlashMenu = Extension.create({
   name: 'slashMenu',
-
+  priority: 1000,
   addOptions () {
     return {
       suggestion1: {
