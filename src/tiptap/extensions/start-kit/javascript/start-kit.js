@@ -23,6 +23,7 @@ import { ListItem } from '@tiptap/extension-list-item'
 import { BulletList } from '@tiptap/extension-bullet-list'
 import { DocumentTitle } from '@/tiptap/extensions/document-title/javascript/document-title.js'
 import { CodeBlockLowlightExtension } from '@/tiptap/extensions/code-block/javascript/code-block.js'
+import { Blockquote } from '@tiptap/extension-blockquote'
 
 export const StarterKit = Extension.create({
   name: 'starterKit',
@@ -90,6 +91,9 @@ export const StarterKit = Extension.create({
     }
     if (this.options.codeBlock !== false) {
       extensions.push(CodeBlockLowlightExtension.configure(this.options?.codeBlock))
+    }
+    if (this.options.blockquote !== false) {
+      extensions.push(Blockquote.configure(this.options?.blockquote))
     }
     if (this.options.placeholder !== false) {
       extensions.push(Placeholder.configure({ // Use a placeholder:

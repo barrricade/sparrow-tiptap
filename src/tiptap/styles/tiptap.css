@@ -272,8 +272,8 @@
 
   hr {
     border: none;
-    border-top: 2px solid rgba(13, 13, 13, 0.1);
-    margin: 2rem 0;
+    border-bottom: 1px solid rgba(13, 13, 13, 0.1);
+    @apply pb-2;
   }
   .document_title {
     @apply flex items-start;

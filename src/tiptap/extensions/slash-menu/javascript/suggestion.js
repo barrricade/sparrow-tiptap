@@ -47,6 +47,35 @@ const itemCommand = (key) => {
         .run()
     }
   }
+  if (key === 'horizontalRule') {
+    return ({ editor, range }) => {
+      editor
+        .chain()
+        .focus()
+        .deleteRange(range)
+        .setHorizontalRule()
+        .run()
+    }
+  }
+  if (key === 'blockquote') {
+    return ({ editor, range }) => {
+      editor
+        .chain()
+        .focus()
+        .deleteRange(range)
+        .setBlockquote()
+        .run()
+    }
+    // console.log(11111)
+    // return ({ editor, range }) => {
+    //   editor
+    //   .chain()
+    //     .focus()
+    //     .deleteRange(range)
+    //     .toggleBlockquote()
+    //     .run()
+    // }
+  }
   const match = key.match(/^h(\d)$/)
   if (match) {
     return ({ editor, range }) => {
@@ -79,7 +108,9 @@ const getItems = (items) => {
       ], 'submenu'),
       getItem('有序列表', 'orderedList', icon('orderedList'), itemCommand('orderedList')),
       getItem('无序列表', 'bubbleList', icon('bubbleList'), itemCommand('bubbleList')),
-      getItem('代码块', 'codeBlock', icon('codeBlock'), itemCommand('codeBlock'))
+      getItem('代码块', 'codeBlock', icon('codeBlock'), itemCommand('codeBlock')),
+      getItem('引用', 'blockquote', icon('blockquote'), itemCommand('blockquote')),
+      getItem('分割线', 'horizontalRule', icon('horizontalRule'), itemCommand('horizontalRule'))
     ], 'group')
   ]
 }

@@ -14,7 +14,7 @@ Sparrow-Tiptap是一个 react 的基于 tiptap 和  的 「所见即所得」 �
 
 # 在线演示 🎄
 
-Play with the editor @ [https://43.134.94.59/](https://43.134.94.59/).
+Play with the editor @ [https://www.barri.cloud/](https://www.barri.cloud/).
 
 # 安装 📦
 

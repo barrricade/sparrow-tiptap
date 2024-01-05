@@ -79,7 +79,7 @@ export function Suggestion ({
           const decorationNode = await getDecorationNodeAsync(view, state)
           // 查询父节点判断是否需要弹出suggestion
           const { $cursor } = view.state.selection
-          const currentNode = $cursor.node()
+          const currentNode = $cursor?.node()
           console.log(currentNode)
           props = {
             editor,

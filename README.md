@@ -15,7 +15,7 @@ English | [简体中文](./README_ZH.md)
 
 # Live demo 🎄
 
-Play with the editor @ [https://43.134.94.59/](https://43.134.94.59/).
+Play with the editor @ [https://www.barri.cloud/](https://www.barri.cloud/).
 
 # Install 📦
 
