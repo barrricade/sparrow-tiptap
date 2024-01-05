@@ -80,6 +80,7 @@ export function Suggestion ({
           // 查询父节点判断是否需要弹出suggestion
           const { $cursor } = view.state.selection
           const currentNode = $cursor.node()
+          console.log(currentNode)
           props = {
             editor,
             range: state.range,
@@ -97,7 +98,7 @@ export function Suggestion ({
             // virtual node for popper.js or tippy.js
             // this can be used for building popups without a DOM node
             // TODO: 后续考虑更灵活的方式
-            clientRect: decorationNode && currentNode.type.name !== 'documentTitle'
+            clientRect: decorationNode && currentNode.type.name !== 'documentTitle' && currentNode.type.name !== 'codeBlock'
               ? () => {
                 // because of `items` can be asynchrounous we’ll search for the current decoration node
                   const { decorationId } = this.key?.getState(editor.state)

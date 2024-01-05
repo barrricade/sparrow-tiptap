@@ -22,7 +22,6 @@ export const CodeBlockComponent = (props) => {
   const handleCopy = () => {
     const code = props.node.textContent
     navigator.clipboard.writeText(code).then(function () {
-      // TODO: 添加提示
       toast.success('复制成功', {
         position: 'top-right',
         autoClose: 3000,
@@ -32,7 +31,14 @@ export const CodeBlockComponent = (props) => {
         theme: 'light'
       })
     }, function () {
-      /* clipboard write failed */
+      toast.error('复制失败', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        draggable: false,
+        theme: 'light'
+      })
     })
   }
   const items = () => {

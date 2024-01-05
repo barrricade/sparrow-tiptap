@@ -98,7 +98,6 @@ const SlashMenu = forwardRef((props, ref) => {
       if (currentLevelItems[newIndex].type === 'submenu') {
         // 打开侧边栏，设置parentIndex
         setVisible(true)
-        // setParentIndex(String(newIndex))
         descendants.push(0)
         break
       } else {
