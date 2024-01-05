@@ -15,7 +15,7 @@ const App = () => {
   <li>
     … or two list items.
   </li>
-</ul>`
+</ul><pre><code class="language-plaintext"></code></pre>`
   // const onBeforeCreate = (event) => {
   //   console.log('onBeforeCreate', event)
   // }

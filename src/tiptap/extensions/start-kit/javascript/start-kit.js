@@ -1,4 +1,5 @@
 import { Extension } from '@tiptap/core'
+
 // Extensions
 import { SlashMenu } from '@/tiptap/extensions/slash-menu/javascript/slash-menu.js'
 import { Dropcursor } from '@tiptap/extension-dropcursor'
@@ -11,7 +12,7 @@ import { Code } from '@tiptap/extension-code'
 import { Italic } from '@tiptap/extension-italic'
 import { Strike } from '@tiptap/extension-strike'
 // Node
-import { CustomDocument } from '@/tiptap/extensions/document/javascript/document.js'
+import { DocumentExtension } from '@/tiptap/extensions/document/javascript/document.js'
 import { Paragraph } from '@tiptap/extension-paragraph'
 import { Text } from '@tiptap/extension-text'
 import { Heading } from '@tiptap/extension-heading'
@@ -21,6 +22,7 @@ import { OrderedList } from '@tiptap/extension-ordered-list'
 import { ListItem } from '@tiptap/extension-list-item'
 import { BulletList } from '@tiptap/extension-bullet-list'
 import { DocumentTitle } from '@/tiptap/extensions/document-title/javascript/document-title.js'
+import { CodeBlockLowlightExtension } from '@/tiptap/extensions/code-block/javascript/code-block.js'
 
 export const StarterKit = Extension.create({
   name: 'starterKit',
@@ -33,7 +35,7 @@ export const StarterKit = Extension.create({
       extensions.push(DocumentTitle.configure(this.options?.documentTitle))
     }
     if (this.options.document !== false) {
-      extensions.push(CustomDocument.configure({ content: 'block+', ...this.options?.document }))
+      extensions.push(DocumentExtension.configure({ content: 'block+', ...this.options?.document }))
     }
 
     if (this.options.heading !== false) {
@@ -85,6 +87,9 @@ export const StarterKit = Extension.create({
     }
     if (this.options.bubbleList !== false) {
       extensions.push(BulletList.configure(this.options?.bubbleList))
+    }
+    if (this.options.codeBlock !== false) {
+      extensions.push(CodeBlockLowlightExtension.configure(this.options?.codeBlock))
     }
     if (this.options.placeholder !== false) {
       extensions.push(Placeholder.configure({ // Use a placeholder:

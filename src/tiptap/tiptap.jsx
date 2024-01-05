@@ -1,8 +1,10 @@
 import { EditorProvider } from '@tiptap/react'
 import './styles/tiptap.css'
+import 'react-toastify/dist/ReactToastify.css'
 import PropTypes from 'prop-types'
 import { StarterKit } from './extensions/index'
 import EditorInput from '@/components/EditorInput.jsx'
+import { ToastContainer } from 'react-toastify'
 export const Stiptap = (props) => {
   const defaultExtensions = [
     StarterKit
@@ -45,7 +47,10 @@ export const Stiptap = (props) => {
   }, editorOptions)
   // TODO: 暂时添加, 后续删除slotAfter
   return (
-    <EditorProvider {...editorOptions} slotAfter={<EditorInput content={content} />} extensions={finalExtensions} content={content}></EditorProvider>
+    <div>
+      <ToastContainer />
+      <EditorProvider {...editorOptions} slotAfter={<EditorInput content={content} />} extensions={finalExtensions} content={content}></EditorProvider>
+    </div>
   )
 }
 Stiptap.propTypes = {

@@ -5,14 +5,14 @@ import { useCurrentEditor } from '@tiptap/react'
 const EditorInput = (props) => {
   const { editor } = useCurrentEditor()
   return (
-    < div className="flex space-x-1 mt-1" >
-      <div className='flex-1 border-2 border-gray-200 border-dashed'>
-        输入：
+    < div className="flex space-x-1 mt-1 break-words" >
+      <div className='w-1/2 border-2 border-gray-200 border-dashed'>
+        input：
         <textarea className='h-48 w-full outline-none' type="text" onChange={(event) => { editor.commands.setContent(event.target.value) }} defaultValue={props.content} />
       </div>
-      <div className='flex-1 border-2 border-gray-200 border-dashed'>
-        输出：
-        <div className='h-48 overflow-auto'>
+      <div className='w-1/2 border-2 border-gray-200 border-dashed'>
+        output：
+        <div className='h-48 w-full overflow-auto'>
           {editor.getHTML()}
         </div>
       </div>

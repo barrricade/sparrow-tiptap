@@ -3,18 +3,9 @@ import tippy from 'tippy.js'
 import React from 'react'
 import SvgIcon from '@/components/SvgIcon'
 import SlashMenu from '../components/SlashMenu.jsx'
+import { getItem } from '@/tiptap/utils/dropdown.js'
 const icon = (name) => React.createElement(SvgIcon, { name, className: 'slash-menu__icon' })
 
-function getItem (label, key, icon, command, children, type) {
-  return {
-    key,
-    icon,
-    command,
-    label,
-    children,
-    type
-  }
-}
 const itemCommand = (key) => {
   if (key === 'text') {
     return ({ editor, range }) => {
@@ -26,13 +17,16 @@ const itemCommand = (key) => {
           .run()
       }
   }
-  // if (key == 'blockquote') {
-  //     if (level) {
-  //         editor.chain().focus().toggleHeading({ level }).run()
-  //     }
-  //     editor.chain().focus().setBlockquote().run()
-  //     return
-  // }
+  if (key === 'codeBlock') {
+      return ({ editor, range }) => {
+        editor
+          .chain()
+          .focus()
+          .deleteRange(range)
+          .toggleCodeBlock({ language: 'plaintext' })
+          .run()
+    }
+  }
   if (key === 'orderedList') {
     return ({ editor, range }) => {
         editor
@@ -84,7 +78,8 @@ const getItems = (items) => {
         getItem('七级标题', 'h7', icon('h7'), itemCommand('h7'))
       ], 'submenu'),
       getItem('有序列表', 'orderedList', icon('orderedList'), itemCommand('orderedList')),
-      getItem('无序列表', 'bubbleList', icon('bubbleList'), itemCommand('bubbleList'))
+      getItem('无序列表', 'bubbleList', icon('bubbleList'), itemCommand('bubbleList')),
+      getItem('代码块', 'codeBlock', icon('codeBlock'), itemCommand('codeBlock'))
     ], 'group')
   ]
 }

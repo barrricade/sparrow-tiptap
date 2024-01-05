@@ -236,7 +236,6 @@ const SlashMenu = forwardRef((props, ref) => {
         ? itemList(props.items)
         : <div className="slash-menu__item">No result</div>
       }
-
     </div >
   )
 })

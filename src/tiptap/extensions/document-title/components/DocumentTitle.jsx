@@ -42,7 +42,7 @@ export const DocumentTitleComponent = (props) => {
   return (
     <NodeViewWrapper onMouseEnter={showAddIconButton} onMouseLeave={hiddenAddIconButton}>
       {
-        icon ? <Button className={`${showAddIcon ? '' : 'invisible'}`} icon={<SvgIcon name="closeSmall" className="w-5 h-5"></SvgIcon>} label='移除表情' onClick={handleHideEmojiSelector}></Button> : <Button className={`${showAddIcon ? '' : 'invisible'}`} icon={<SvgIcon name="emojiHappy" className="w-5 h-5"></SvgIcon>} label='添加表情' onClick={handleShowEmojiSelector}></Button>
+        icon ? <Button className={`${showAddIcon ? '' : 'invisible'}`} icon={<SvgIcon name="closeSmall" className="w-5 h-5"></SvgIcon>} onClick={handleHideEmojiSelector}>移除表情</Button> : <Button className={`${showAddIcon ? '' : 'invisible'}`} icon={<SvgIcon name="emojiHappy" className="w-5 h-5"></SvgIcon>} onClick={handleShowEmojiSelector}>添加表情</Button>
       }
       <div className="document_title">
         <Tippy content={<EmojiPicker onEmojiClick={selectIcon} />} appendTo={() => document.body} interactive={true} visible={visible} onClickOutside={hide}>
