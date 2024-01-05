@@ -11,7 +11,6 @@ const SlashMenu = forwardRef((props, ref) => {
   let timeoutId = null
   const [selectedIndex, setSelectedIndex] = useState('0')
   // 用于记录当前打开的子菜单的父菜单的index
-  // const [parentIndex, setParentIndex] = useState('')
   const [visible, setVisible] = useState(false)
   const selectItem = (index) => {
     let descendants = index.split('/')
