@@ -76,6 +76,17 @@ const itemCommand = (key) => {
     //     .run()
     // }
   }
+  if (key === 'insertLink') {
+    // TODO: 添加一个resource extension 添加
+    return ({ editor, range }) => {
+      editor
+        .chain()
+        .focus()
+        .deleteRange(range)
+        .insertResource()
+        .run()
+    }
+  }
   const match = key.match(/^h(\d)$/)
   if (match) {
     return ({ editor, range }) => {
@@ -110,7 +121,8 @@ const getItems = (items) => {
       getItem('无序列表', 'bubbleList', icon('bubbleList'), itemCommand('bubbleList')),
       getItem('代码块', 'codeBlock', icon('codeBlock'), itemCommand('codeBlock')),
       getItem('引用', 'blockquote', icon('blockquote'), itemCommand('blockquote')),
-      getItem('分割线', 'horizontalRule', icon('horizontalRule'), itemCommand('horizontalRule'))
+      getItem('分割线', 'horizontalRule', icon('horizontalRule'), itemCommand('horizontalRule')),
+      getItem('链接', 'link', icon('link'), itemCommand('insertLink'))
     ], 'group')
   ]
 }

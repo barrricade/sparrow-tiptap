@@ -60,7 +60,10 @@ const App = () => {
           // onFocus={onFocus}
           // onBlur={onBlur}
           // onDestroy={onDestroy}
-          extensions={[StarterKit.configure({ document: { documentTitle: true } })]}
+          extensions={[StarterKit.configure({
+            document: { documentTitle: true },
+            link: { validate: (href) => /^https?:\/\//.test(href) }
+          })]}
         // slashMenu={[{ label: 'test', key: 'h1' }]}
         />
       }></Sidebar>

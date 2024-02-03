@@ -81,7 +81,13 @@
   >*+* {
     @apply !mt-2
   }
+  a {
+    @apply cursor-pointer text-blue-400;
+  }
 
+  a:hover {
+    @apply border-b border-blue-400;;
+  }
   ul {
     padding: 0 1rem;
     list-style: disc;

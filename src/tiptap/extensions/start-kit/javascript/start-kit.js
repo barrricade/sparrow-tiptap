@@ -6,6 +6,7 @@ import { Dropcursor } from '@tiptap/extension-dropcursor'
 import { Gapcursor } from '@tiptap/extension-gapcursor'
 import { History } from '@tiptap/extension-history'
 import { Placeholder } from '@tiptap/extension-placeholder'
+import { Link } from '@tiptap/extension-link'
 // Mark
 import { Bold } from '@tiptap/extension-bold'
 import { Code } from '@tiptap/extension-code'
@@ -24,6 +25,7 @@ import { BulletList } from '@tiptap/extension-bullet-list'
 import { DocumentTitle } from '@/tiptap/extensions/document-title/javascript/document-title.js'
 import { CodeBlockLowlightExtension } from '@/tiptap/extensions/code-block/javascript/code-block.js'
 import { Blockquote } from '@tiptap/extension-blockquote'
+import { Resource } from '@/tiptap/extensions/resource/javascript/resource.js'
 
 export const StarterKit = Extension.create({
   name: 'starterKit',
@@ -111,6 +113,12 @@ export const StarterKit = Extension.create({
         },
         ...this.options?.bubbleList
       }))
+    }
+    if (this.options.link !== false) {
+      extensions.push(Link.configure(this.options?.link))
+    }
+    if (this.options.resource !== false) {
+      extensions.push(Resource.configure(this.options?.resource))
     }
     return extensions
   }
